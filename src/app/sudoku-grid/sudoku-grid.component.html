@@ -1,0 +1,34 @@
+<div class="preview">
+    <div class="grid-row" *ngFor="let row of gridSize">
+        <div *ngFor="let col of gridSize">
+            <div *ngIf="!defaultMap.has(row+'-'+col)">
+                <input 
+                [id]="row+'-'+col"             
+                class="grid-cell"
+                value=""
+                maxlength="1"
+                title="please enter valid input between 1 to 9"
+                pattern="^[1-9]$"
+                inputmode="numeric"
+                (keydown)="sudokuValidate($event,row,col)"
+            >
+            </div>
+            <div *ngIf="defaultMap.has(row+'-'+col)">
+                <input 
+                [id]="row+'-'+col"             
+                class="grid-cell"
+                [value]="defaultMap.get(row+'-'+col)"
+                maxlength="1"
+                disabled
+                title="please enter valid input between 1 to 9"
+                pattern="^[1-9]$"
+                inputmode="numeric"
+                (keydown)="sudokuValidate($event,row,col)"
+            > 
+            </div>    
+        </div>
+    </div>
+    <div>
+        <button (click)="reset()">reset</button>
+    </div>
+</div>
